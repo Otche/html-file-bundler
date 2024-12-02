@@ -1,0 +1,8 @@
+{
+  "eslint.format.enable": true,
+  //set tup eslint as default formatter for typescript and javascript
+  "[typescript]": {
+    "editor.codeActionsOnSave": { "source.fixAll.eslint": "always" },
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  }
+}

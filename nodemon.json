@@ -1,0 +1,7 @@
+{
+    "watch": ["src", "templates", "public"],
+    "ext": "ts, json, ejs, css",
+    "ignore": ["src/**/*.spec.ts"],
+    "exec": "ts-node -r tsconfig-paths/register"
+}
+  
