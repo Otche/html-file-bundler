@@ -15,7 +15,7 @@ jest.mock('fs/promises', () => ({
   }),
 }))
 
-describe('image loader', () => {
+describe('Image loader', () => {
   /**
    *
    */
@@ -35,10 +35,6 @@ describe('image loader', () => {
   test('should decodeHttpImg throw error', async () => {
     expect(() => decodeHttpImg('http://test.com/test.txt')).rejects.toThrow(
       'Invalid image uri'
-    )
-
-    expect(() => decodeHttpImg('file://test.com/test.txt')).rejects.toThrow(
-      'Invalid http uri'
     )
   })
   /**

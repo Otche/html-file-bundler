@@ -1,25 +1,21 @@
+import { UTF8 } from '@/utils/constant'
+import { isBinImgName, isSvgImgName } from '@/utils/ressource-path'
 import axios from 'axios'
 import fs from 'fs/promises'
+
 /**
  *
  * @param imgUri
  * @returns
  */
 export const decodeHttpImg = async (imgUri: string) => {
-  if (!imgUri.startsWith('http://') && !imgUri.startsWith('https://'))
-    throw new Error('Invalid http uri')
-
-  const data = await axios.get(imgUri)
-  if (imgUri.endsWith('.svg')) {
-    return data.data
+  const resp = await axios.get(imgUri)
+  if (isSvgImgName(imgUri)) {
+    return resp.data
   }
 
-  if (
-    imgUri.endsWith('.png') ||
-    imgUri.endsWith('.jpg') ||
-    imgUri.endsWith('.jpeg')
-  ) {
-    return Buffer.from(data.data, 'binary').toString('base64')
+  if (isBinImgName(imgUri)) {
+    return Buffer.from(resp.data).toString('base64')
   }
 
   throw new Error('Invalid image uri')
@@ -30,17 +26,14 @@ export const decodeHttpImg = async (imgUri: string) => {
  * @returns
  */
 export const decodeFileImg = async (imgPath: string) => {
-  const data = await fs.readFile(imgPath, 'utf8')
-  if (imgPath.endsWith('.svg')) {
+  if (isSvgImgName(imgPath)) {
+    const data = await fs.readFile(imgPath, UTF8)
     return data
   }
 
-  if (
-    imgPath.endsWith('.png') ||
-    imgPath.endsWith('.jpg') ||
-    imgPath.endsWith('.jpeg')
-  ) {
-    return Buffer.from(data, 'binary').toString('base64')
+  if (isBinImgName(imgPath)) {
+    const data = await fs.readFile(imgPath)
+    return Buffer.from(data).toString('base64')
   }
 
   throw new Error('Invalid image path')
