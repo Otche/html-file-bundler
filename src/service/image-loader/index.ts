@@ -8,10 +8,10 @@ import fs from 'fs/promises'
  * @param imgUri
  * @returns
  */
-export const decodeHttpImg = async (imgUri: string) => {
+export const loadHttpImg = async (imgUri: string) => {
   const resp = await axios.get(imgUri)
   if (isSvgImgName(imgUri)) {
-    return resp.data
+    return resp.data as string
   }
 
   if (isBinImgName(imgUri)) {
@@ -25,7 +25,7 @@ export const decodeHttpImg = async (imgUri: string) => {
  * @param imgPath
  * @returns
  */
-export const decodeFileImg = async (imgPath: string) => {
+export const loadFileImg = async (imgPath: string) => {
   if (isSvgImgName(imgPath)) {
     const data = await fs.readFile(imgPath, UTF8)
     return data

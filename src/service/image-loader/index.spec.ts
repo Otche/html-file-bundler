@@ -1,4 +1,4 @@
-import { decodeFileImg, decodeHttpImg } from '.'
+import { loadFileImg, loadHttpImg } from '.'
 
 jest.mock('axios', () => ({
   get: jest.fn(() => {
@@ -19,21 +19,21 @@ describe('Image loader', () => {
   /**
    *
    */
-  test('should decodeHttpImg', async () => {
-    const svg = await decodeHttpImg('http://test.com/test.svg')
+  test('should loadHttpImg', async () => {
+    const svg = await loadHttpImg('http://test.com/test.svg')
     expect(svg).toBe('test')
-    const png = await decodeHttpImg('http://test.com/test.png')
+    const png = await loadHttpImg('http://test.com/test.png')
     expect(png).toBe('dGVzdA==')
-    const jpg = await decodeHttpImg('http://test.com/test.jpg')
+    const jpg = await loadHttpImg('http://test.com/test.jpg')
     expect(jpg).toBe('dGVzdA==')
-    const jpeg = await decodeHttpImg('http://test.com/test.jpeg')
+    const jpeg = await loadHttpImg('http://test.com/test.jpeg')
     expect(jpeg).toBe('dGVzdA==')
   })
   /**
    *
    */
   test('should decodeHttpImg throw error', async () => {
-    expect(() => decodeHttpImg('http://test.com/test.txt')).rejects.toThrow(
+    expect(() => loadHttpImg('http://test.com/test.txt')).rejects.toThrow(
       'Invalid image uri'
     )
   })
@@ -41,13 +41,13 @@ describe('Image loader', () => {
    *
    */
   test('should decodeFileImg', async () => {
-    const svg = await decodeFileImg('/test/test.svg')
+    const svg = await loadFileImg('/test/test.svg')
     expect(svg).toBe('test')
-    const png = await decodeFileImg('/test/test.png')
+    const png = await loadFileImg('/test/test.png')
     expect(png).toBe('dGVzdA==')
-    const jpg = await decodeFileImg('/testtest.jpg')
+    const jpg = await loadFileImg('/testtest.jpg')
     expect(jpg).toBe('dGVzdA==')
-    const jpeg = await decodeFileImg('/test/test.jpeg')
+    const jpeg = await loadFileImg('/test/test.jpeg')
     expect(jpeg).toBe('dGVzdA==')
   })
 
@@ -55,7 +55,7 @@ describe('Image loader', () => {
    *
    */
   test('should decodeFileImg throw error', async () => {
-    expect(() => decodeFileImg('/test/test.txt')).rejects.toThrow(
+    expect(() => loadFileImg('/test/test.txt')).rejects.toThrow(
       'Invalid image path'
     )
   })
