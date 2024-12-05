@@ -25,9 +25,9 @@ jest.mock('../image-loader', () => ({
   loadHttpImg: jest.fn((uri: string) => {
     if (!uri.startsWith('http://') && !uri.startsWith('https://'))
       return Promise.reject('Invalid URI')
-    if (uri.endsWith('.svg')) return Promise.resolve({ data: '<svg></svg>' })
+    if (uri.endsWith('.svg')) return Promise.resolve('<svg></svg>')
     if (uri.endsWith('.png') || uri.endsWith('.jpg') || uri.endsWith('.jpeg'))
-      return Promise.resolve({ data: 'test' })
+      return Promise.resolve('test')
     throw new Error('Mock Error')
   }),
 }))
@@ -38,13 +38,13 @@ jest.mock('../image-loader', () => ({
 describe('Image-resolver', () => {
   //
   test('Should loadImg from uri', async () => {
-    expect(await loadImg('/dirname', 'http://test.com/test.svg')).toEqual({
-      data: '<svg></svg>',
-    })
+    expect(await loadImg('/dirname', 'http://test.com/test.svg')).toEqual(
+      '<svg></svg>'
+    )
 
-    expect(await loadImg('/dirname', 'http://test.com/test.png')).toEqual({
-      data: 'test',
-    })
+    expect(await loadImg('/dirname', 'http://test.com/test.png')).toEqual(
+      'test'
+    )
 
     expect(await loadImg('/dirname', 'test.jpeg')).toEqual('test')
     expect(await loadImg('/dirname', 'test.svg')).toEqual('<svg></svg>')
