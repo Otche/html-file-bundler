@@ -1,4 +1,5 @@
 import { loadImg, replaceImg } from './image-resolver'
+import { mockLoadFileImg, mockLoadHttpImg } from './mock'
 
 /**
  *
@@ -9,27 +10,11 @@ jest.mock('../image-loader', () => ({
   /**
    *
    */
-  loadFileImg: jest.fn((path: string) => {
-    if (path.endsWith('.svg')) return Promise.resolve('<svg></svg>')
-    if (
-      path.endsWith('.png') ||
-      path.endsWith('.jpg') ||
-      path.endsWith('.jpeg')
-    )
-      return Promise.resolve('test')
-    throw new Error('Mock Error')
-  }),
+  loadFileImg: (path: string) => mockLoadFileImg(path),
   /**
    *
    */
-  loadHttpImg: jest.fn((uri: string) => {
-    if (!uri.startsWith('http://') && !uri.startsWith('https://'))
-      return Promise.reject('Invalid URI')
-    if (uri.endsWith('.svg')) return Promise.resolve('<svg></svg>')
-    if (uri.endsWith('.png') || uri.endsWith('.jpg') || uri.endsWith('.jpeg'))
-      return Promise.resolve('test')
-    throw new Error('Mock Error')
-  }),
+  loadHttpImg: (uri: string) => mockLoadHttpImg(uri),
 }))
 
 /**
@@ -43,10 +28,10 @@ describe('Image-resolver', () => {
     )
 
     expect(await loadImg('/dirname', 'http://test.com/test.png')).toEqual(
-      'test'
+      '==AAAAAABB=='
     )
 
-    expect(await loadImg('/dirname', 'test.jpeg')).toEqual('test')
+    expect(await loadImg('/dirname', 'test.jpeg')).toEqual('==AAABB==')
     expect(await loadImg('/dirname', 'test.svg')).toEqual('<svg></svg>')
   })
   //

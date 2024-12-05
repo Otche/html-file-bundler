@@ -1,34 +1,6 @@
 import { BundleTree } from './bundle-tree'
-import { HTML_RESOLVE_IMAGE } from './mock'
+import { HTML_RESOLVE_IMAGE, mockLoadFileImg, mockLoadHttpImg } from './mock'
 import { BundleTreeResolver } from './type'
-
-jest.mock('../image-loader', () => ({
-  __esModule: true,
-  /**
-   *
-   */
-  loadFileImg: jest.fn((path: string) => {
-    if (path.endsWith('.svg')) return Promise.resolve(`<svg></svg>`)
-    if (
-      path.endsWith('.png') ||
-      path.endsWith('.jpg') ||
-      path.endsWith('.jpeg')
-    )
-      return Promise.resolve(`==AAABB==`)
-    throw new Error('Mock Error')
-  }),
-  /**
-   *
-   */
-  loadHttpImg: jest.fn((uri: string) => {
-    if (!uri.startsWith('http://') && !uri.startsWith('https://'))
-      return Promise.reject('Invalid URI')
-    if (uri.endsWith('.svg')) return Promise.resolve(`<svg></svg>`)
-    if (uri.endsWith('.png') || uri.endsWith('.jpg') || uri.endsWith('.jpeg'))
-      return Promise.resolve(`==AAAAAABB==`)
-    throw new Error('Mock Error')
-  }),
-}))
 
 const resolveMock: BundleTreeResolver[] = [
   {
@@ -48,6 +20,18 @@ const resolveMock: BundleTreeResolver[] = [
     1: '/test/img.svg',
   },
 ] as unknown as BundleTreeResolver[]
+
+jest.mock('../image-loader', () => ({
+  __esModule: true,
+  /**
+   *
+   */
+  loadFileImg: (path: string) => mockLoadFileImg(path),
+  /**
+   *
+   */
+  loadHttpImg: (uri: string) => mockLoadHttpImg(uri),
+}))
 
 describe('BundleTree', () => {
   test('should resolve image', async () => {
