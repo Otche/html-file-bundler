@@ -1,0 +1,1 @@
+tsconfig-paths/register : this package is used to resolve import using tsconfig alias path
