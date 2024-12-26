@@ -1,5 +1,5 @@
-import { CSSBundleTree } from './css_bundle-tree'
-import { mockLoadFileImg, mockLoadHttpImg } from './mock'
+import { CSSBundleTree } from './css-bundle-tree'
+import { mockLoadFileImg, mockLoadHttpImg } from './mocks/load-files.mock'
 
 jest.mock('../image-loader', () => ({
   __esModule: true,

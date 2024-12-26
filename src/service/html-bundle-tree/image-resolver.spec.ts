@@ -1,5 +1,5 @@
 import { loadImg, replaceImg } from './image-resolver'
-import { mockLoadFileImg, mockLoadHttpImg } from './mock'
+import { mockLoadFileImg, mockLoadHttpImg } from './mocks/load-files.mock'
 
 /**
  *

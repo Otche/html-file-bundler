@@ -18,24 +18,6 @@ async function bundle() {
     htmlBundleTree.getBundledHtmlStr(),
     UTF8
   )
-  // console.log(
-  //   Array.from(regExpExecArray(htmlstr, LINK_REGEXP)).map((e) => {
-  //     return { t: e }
-  //   })
-  // )
-  // const htmlBundleTree = new HTMLBundleTree(htmlstr, path.basename(template))
-  /*const bundleTree = {
-    template: template,
-    templateBasename: path.basename(template),
-    css: regExpExecArray(htmlstr, linkRegExp),
-    style: regExpExecArray(htmlstr, styleRegExp),
-    //js: regExpExecArray(htmlstr, scriptRegExp),
-    img: Array.from(regExpExecArray(htmlstr, imgRegExp)).map((e) => {
-      return {
-        ...e,
-      }
-    }),
-  }*/
 }
 
 bundle()

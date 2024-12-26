@@ -1,5 +1,5 @@
 import { BundleTree } from './bundle-tree'
-import { HTML_RESOLVE_IMAGE, mockLoadFileImg, mockLoadHttpImg } from './mock'
+import { HTML_RESOLVE_IMAGE, mockLoadFileImg, mockLoadHttpImg } from './mocks/load-files.mock'
 import { BundleTreeResolver } from './type'
 
 const resolveMock: BundleTreeResolver[] = [

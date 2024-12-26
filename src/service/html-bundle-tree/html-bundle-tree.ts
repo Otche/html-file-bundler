@@ -9,7 +9,7 @@ import { isHttpUriName } from '@/utils/ressource-path'
 import path from 'path'
 import axios from 'axios'
 import fs from 'fs/promises'
-import { CSSBundleTree } from './css_bundle-tree'
+import { CSSBundleTree } from './css-bundle-tree'
 import { BundleTreeResolver } from './type'
 import { BundleTree } from './bundle-tree'
 
