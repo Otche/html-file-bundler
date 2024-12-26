@@ -5,7 +5,9 @@ import { mockLoadFileImg, mockLoadHttpImg } from './mocks/load-files.mock'
 jest.mock('axios', () => {
   return {
     get: jest.fn(() => {
-      return Promise.resolve({ data: 'h1 { background-color : green:}' })
+      return Promise.resolve({
+        data: 'h1 { background-color : red;}  body { background: url(http://example.com/img.jpg); }',
+      })
     }),
   }
 })
@@ -13,7 +15,9 @@ jest.mock('axios', () => {
 jest.mock('fs/promises', () => {
   return {
     readFile: jest.fn(() => {
-      return Promise.resolve('h1 { background-color : green:}')
+      return Promise.resolve(
+        'h1 { background-color : green;} body { background: url(http://example.com/img.jpg); } '
+      )
     }),
   }
 })
@@ -37,5 +41,26 @@ describe('HtmlBundleTree', () => {
   })
   test('should get input data as first bundled html string ', () => {
     expect(htmlBundleTree.getBundledHtmlStr()).toBe(HTML_MOCK.input)
+  })
+
+  test('should replace src image with base64 data ', async () => {
+    await htmlBundleTree.resolveImgsSrc()
+    expect(htmlBundleTree.getBundledHtmlStr().replace(/\s/g, '')).toBe(
+      HTML_MOCK.resolve_src_images_snapshot.replace(/\s/g, '')
+    )
+  })
+
+  test('should replace style url images with base64 data ', async () => {
+    await htmlBundleTree.resolveStyleImgsUrl()
+    expect(htmlBundleTree.getBundledHtmlStr().replace(/\s/g, '')).toBe(
+      HTML_MOCK.resolve_all_imgs_snapshot.replace(/\s/g, '')
+    )
+  })
+
+  test('should styles and here url images with base64', async () => {
+    await htmlBundleTree.resolveStylesheetLinks()
+    expect(htmlBundleTree.getBundledHtmlStr().replace(/\s/g, '')).toBe(
+      HTML_MOCK.resolve_all_snapshot.replace(/\s/g, '')
+    )
   })
 })

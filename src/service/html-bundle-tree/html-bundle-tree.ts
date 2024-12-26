@@ -58,7 +58,7 @@ export class HtmlBundleTree extends BundleTree {
    *
    *
    */
-  async resolveImgSrc() {
+  async resolveImgsSrc() {
     this.htmlOutputStr = await HtmlBundleTree.resolveImg(
       this.htmlOutputStr,
       this.dirname,
@@ -70,7 +70,7 @@ export class HtmlBundleTree extends BundleTree {
    *
    *
    */
-  async resolveStyleImgUrl() {
+  async resolveStyleImgsUrl() {
     this.htmlOutputStr = await HtmlBundleTree.resolveImg(
       this.htmlOutputStr,
       this.dirname,
@@ -82,7 +82,7 @@ export class HtmlBundleTree extends BundleTree {
   /**
    *
    */
-  async resolveStylesheetLink() {
+  async resolveStylesheetLinks() {
     for (const link of this.htmlStylesheetLink) {
       const linkSrc = link[1]
       let cssBundler: CSSBundleTree
