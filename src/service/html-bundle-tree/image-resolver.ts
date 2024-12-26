@@ -50,5 +50,5 @@ export const replaceImg = async (
     return str.replace(imgSrc, svgLiteral)
   }
   //
-  return str
+  throw new Error('Invalid image type')
 }

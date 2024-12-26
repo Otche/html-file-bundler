@@ -22,7 +22,7 @@ jest.mock('../image-loader', () => ({
  */
 describe('Image resolver', () => {
   //
-  test('should loadImg from uri', async () => {
+  test('should load image from uri', async () => {
     expect(await loadImg('/dirname', 'http://test.com/test.svg')).toEqual(
       '<svg></svg>'
     )
@@ -35,7 +35,7 @@ describe('Image resolver', () => {
     expect(await loadImg('/dirname', 'test.svg')).toEqual('<svg></svg>')
   })
   //
-  test('should loadImg throw error', async () => {
+  test('should load image throw error', async () => {
     expect(() => loadImg('/dirname', 'test')).rejects.toThrow('Mock Error')
     expect(() => loadImg('/dirname', 'http://test.com/test')).rejects.toThrow(
       'Mock Error'
@@ -45,7 +45,7 @@ describe('Image resolver', () => {
     ).rejects.toThrow('Mock Error')
   })
   //
-  test('should replaceImg in string', async () => {
+  test('should replace image in string', async () => {
     expect(
       await replaceImg('test <img src="test.svg" />', 'test.svg', '<svg></svg>')
     ).toBe('test <img src="data:image/svg+xml;utf8,%3Csvg%3E%3C/svg%3E" />')
@@ -64,5 +64,11 @@ describe('Image resolver', () => {
     ).toBe(
       'test <style> .h1 {  background: url("data:image/svg+xml;utf8,test");}</style>'
     )
+  })
+
+  test('should throw error', async () => {
+    expect(() =>
+      replaceImg('test <img src="test.txt" />', 'test.txt', 'test')
+    ).rejects.toThrow('Invalid image type')
   })
 })
