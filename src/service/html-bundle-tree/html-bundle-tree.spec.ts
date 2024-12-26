@@ -34,7 +34,7 @@ jest.mock('../image-loader', () => ({
   loadHttpImg: (uri: string) => mockLoadHttpImg(uri),
 }))
 
-describe('HtmlBundleTree', () => {
+describe('HtmlBundleTree steps', () => {
   let htmlBundleTree: HtmlBundleTree
   beforeAll(() => {
     htmlBundleTree = new HtmlBundleTree(HTML_MOCK.input, 'dirname')
@@ -70,6 +70,24 @@ describe('HtmlBundleTree', () => {
     expect(htmlBundleData.htmlStyleImgsUrl.length).toBe(2)
     expect(htmlBundleData.htmlStylesheetLink.length).toBe(3)
     expect(htmlBundleData.htmlOutputStr.replace(/\s/g, '')).toBe(
+      HTML_MOCK.resolve_all_snapshot.replace(/\s/g, '')
+    )
+  })
+})
+
+describe('HtmlBundleTree resolve all', () => {
+  let htmlBundleTree: HtmlBundleTree
+  beforeAll(() => {
+    htmlBundleTree = new HtmlBundleTree(HTML_MOCK.input, 'dirname')
+  })
+
+  test('should get input data as first bundled html string ', () => {
+    expect(htmlBundleTree.getBundledHtmlStr()).toBe(HTML_MOCK.input)
+  })
+
+  test('should resolve all', async () => {
+    const htmlOutputStr = await htmlBundleTree.resolve()
+    expect(htmlOutputStr.replace(/\s/g, '')).toBe(
       HTML_MOCK.resolve_all_snapshot.replace(/\s/g, '')
     )
   })

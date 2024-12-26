@@ -130,4 +130,15 @@ export class HtmlBundleTree extends BundleTree {
   getBundledHtmlStr() {
     return this.htmlOutputStr
   }
+
+  /**
+   *
+   * @returns
+   */
+  async resolve(): Promise<string> {
+    await this.resolveImgsSrc()
+    await this.resolveStyleImgsUrl()
+    await this.resolveStylesheetLinks()
+    return this.htmlOutputStr
+  }
 }
