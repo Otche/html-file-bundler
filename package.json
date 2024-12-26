@@ -1,5 +1,5 @@
 {
-  "name": "html-one-file-bundler",
+  "name": "html-file-bundler",
   "version": "0.0.1",
   "description": "",
   "main": "index.js",
