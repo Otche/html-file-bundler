@@ -14,7 +14,7 @@ jest.mock('../image-loader', () => ({
 }))
 
 describe('CSSBundleTree', () => {
-  test('resolveStyleImgUrl', async () => {
+  test('should resolve style images url', async () => {
     const cssStr = `body { background: url(http://example.com/img.jpg);} h1 {background: url(test/img.svg);}`
     const cssBundleTree = new CSSBundleTree(cssStr, '/dirname')
     await cssBundleTree.resolveStyleImgUrl()

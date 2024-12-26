@@ -1,9 +1,6 @@
 import { HtmlBundleTree } from './html-bundle-tree'
-import {
-  HTML_RESOLVE_IMAGE,
-  mockLoadFileImg,
-  mockLoadHttpImg,
-} from './mocks/load-files.mock'
+import { HTML_MOCK } from './mocks/html-mock'
+import { mockLoadFileImg, mockLoadHttpImg } from './mocks/load-files.mock'
 
 jest.mock('axios', () => {
   return {
@@ -36,9 +33,9 @@ jest.mock('../image-loader', () => ({
 describe('HtmlBundleTree', () => {
   let htmlBundleTree: HtmlBundleTree
   beforeAll(() => {
-    htmlBundleTree = new HtmlBundleTree(HTML_RESOLVE_IMAGE.input, 'dirname')
+    htmlBundleTree = new HtmlBundleTree(HTML_MOCK.input, 'dirname')
   })
   test('should get input data as first bundled html string ', () => {
-    expect(htmlBundleTree.getBundledHtmlStr()).toBe(HTML_RESOLVE_IMAGE.input)
+    expect(htmlBundleTree.getBundledHtmlStr()).toBe(HTML_MOCK.input)
   })
 })
