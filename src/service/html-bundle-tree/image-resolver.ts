@@ -41,7 +41,6 @@ export const replaceImg = async (
 ) => {
   if (isBinImgName(imgSrc)) {
     const b64Literal = decorate + BASE64_PREFIX_STR + data + decorate
-    //console.log('b64Literal:', b64Literal)
     return str.replace(imgSrc, b64Literal)
   }
   //

@@ -6,7 +6,7 @@ jest.mock('axios', () => {
   return {
     get: jest.fn(() => {
       return Promise.resolve({
-        data: 'h1 { background-color : red;}  body { background: url(http://example.com/img.jpg); }',
+        data: 'h1 { background-color : red;}  body { background: url(./img.jpg); }',
       })
     }),
   }
@@ -60,6 +60,16 @@ describe('HtmlBundleTree', () => {
   test('should styles and here url images with base64', async () => {
     await htmlBundleTree.resolveStylesheetLinks()
     expect(htmlBundleTree.getBundledHtmlStr().replace(/\s/g, '')).toBe(
+      HTML_MOCK.resolve_all_snapshot.replace(/\s/g, '')
+    )
+  })
+
+  test('should html bundle tree return string parsed data', () => {
+    const htmlBundleData = JSON.parse(htmlBundleTree.toString())
+    expect(htmlBundleData.htmlImgsSrc.length).toBe(2)
+    expect(htmlBundleData.htmlStyleImgsUrl.length).toBe(2)
+    expect(htmlBundleData.htmlStylesheetLink.length).toBe(3)
+    expect(htmlBundleData.htmlOutputStr.replace(/\s/g, '')).toBe(
       HTML_MOCK.resolve_all_snapshot.replace(/\s/g, '')
     )
   })

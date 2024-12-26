@@ -113,8 +113,13 @@ export class HtmlBundleTree extends BundleTree {
    * @returns
    *
    */
-  tostring() {
-    return JSON.stringify(this.htmlImgsSrc)
+  toString() {
+    return JSON.stringify({
+      htmlImgsSrc: this.htmlImgsSrc,
+      htmlStyleImgsUrl: this.htmlStyleImgsUrl,
+      htmlStylesheetLink: this.htmlStylesheetLink,
+      htmlOutputStr: this.htmlOutputStr,
+    })
   }
 
   /**
