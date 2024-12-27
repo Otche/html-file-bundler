@@ -69,6 +69,6 @@ describe('Image resolver', () => {
   test('should throw error', async () => {
     expect(() =>
       replaceImg('test <img src="test.txt" />', 'test.txt', 'test')
-    ).rejects.toThrow('Invalid image type')
+    ).rejects.toThrow('unsuported test.txt must be svg or png or jpg or jpeg')
   })
 })

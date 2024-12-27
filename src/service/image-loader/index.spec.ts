@@ -34,7 +34,7 @@ describe('Image loader', () => {
    */
   test('should decodeHttpImg throw error', async () => {
     expect(() => loadHttpImg('http://test.com/test.txt')).rejects.toThrow(
-      'Invalid image uri'
+      'Invalid image type http://test.com/test.txt must be svg or png or jpg or jpeg'
     )
   })
   /**
@@ -56,7 +56,7 @@ describe('Image loader', () => {
    */
   test('should decodeFileImg throw error', async () => {
     expect(() => loadFileImg('/test/test.txt')).rejects.toThrow(
-      'Invalid image path'
+      'Invalid image type /test/test.txt must be svg or png or jpg or jpeg'
     )
   })
 })

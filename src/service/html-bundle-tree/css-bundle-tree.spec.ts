@@ -19,7 +19,7 @@ describe('CSSBundleTree', () => {
     const cssBundleTree = new CSSBundleTree(cssStr, '/dirname')
     await cssBundleTree.resolveStyleImgUrl()
     expect(cssBundleTree.getBundledCssStr()).toBe(
-      'body { background: url("data:image/png;base64,==AAAAAABB==");} h1 {background: url("data:image/svg+xml;utf8,%3Csvg%3E%3C/svg%3E");}'
+      'body { background: url("data:image/jpg;base64,==AAAAAABB==");} h1 {background: url("data:image/svg+xml;utf8,%3Csvg%3E%3C/svg%3E");}'
     )
   })
 })

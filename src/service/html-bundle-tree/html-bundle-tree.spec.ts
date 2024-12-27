@@ -6,7 +6,7 @@ jest.mock('axios', () => {
   return {
     get: jest.fn(() => {
       return Promise.resolve({
-        data: 'h1 { background-color : red;}  body { background: url(./img.jpg); }',
+        data: 'h1 { background-color : red;}  body { background: url(./img.png); }',
       })
     }),
   }
@@ -16,7 +16,7 @@ jest.mock('fs/promises', () => {
   return {
     readFile: jest.fn(() => {
       return Promise.resolve(
-        'h1 { background-color : green;} body { background: url(http://example.com/img.jpg); } '
+        'h1 { background-color : green;} body { background: url(http://example.com/img.png); } '
       )
     }),
   }

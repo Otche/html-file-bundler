@@ -1,16 +1,16 @@
 {
   "compilerOptions": {
     "plugins": [{ "transform": "typescript-transform-paths" }],
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["*"]
+      "@/*": ["src/*"]
     },
     "target": "ES2021",
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "noLib": false,
     "module": "commonjs",
-    "rootDir": "./src",
+    "rootDirs": ["./src", "./sample"],
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "allowJs": false,
@@ -28,6 +28,6 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "sample/index.ts"],
   "exclude": ["node_modules"]
 }

@@ -9,16 +9,19 @@ import fs from 'fs/promises'
  * @returns
  */
 export const loadHttpImg = async (imgUri: string) => {
-  const resp = await axios.get(imgUri)
   if (isSvgImgName(imgUri)) {
+    const resp = await axios.get(imgUri)
     return resp.data as string
   }
 
   if (isBinImgName(imgUri)) {
-    return Buffer.from(resp.data).toString('base64')
+    const resp = await axios.get(imgUri, { responseType: 'arraybuffer' })
+    return Buffer.from(resp.data, 'binary').toString('base64')
   }
 
-  throw new Error('Invalid image uri')
+  throw new Error(
+    `Invalid image type ${imgUri} must be svg or png or jpg or jpeg`
+  )
 }
 /**
  *
@@ -36,5 +39,7 @@ export const loadFileImg = async (imgPath: string) => {
     return Buffer.from(data).toString('base64')
   }
 
-  throw new Error('Invalid image path')
+  throw new Error(
+    `Invalid image type ${imgPath} must be svg or png or jpg or jpeg`
+  )
 }

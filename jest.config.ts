@@ -20,7 +20,6 @@ const config: Config.InitialOptions = {
     '!src/**/*.mock.ts',
   ],
   testMatch: ["**/?(*.)+(spec|test).ts"],
-  //testMatch: ["**/src/lib/html-transform/test/index.spec.ts"],
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   
 }

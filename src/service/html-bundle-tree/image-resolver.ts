@@ -5,8 +5,15 @@ import {
 } from '@/utils/ressource-path'
 
 import path from 'path'
-import { BASE64_PREFIX_STR, SVG_PREFIX_STR } from '@/utils/constant'
+import { base64Prefix, SVG_PREFIX_STR } from '@/utils/constant'
 import { loadFileImg, loadHttpImg } from '../image-loader'
+
+const removeUrlQuotes = (url: string) => {
+  return (url.startsWith('"') && url.endsWith('"')) ||
+    (url.startsWith("'") && url.endsWith("'"))
+    ? url.slice(1, -1)
+    : url
+}
 
 /**
  *
@@ -15,14 +22,12 @@ import { loadFileImg, loadHttpImg } from '../image-loader'
  * @returns
  */
 export const loadImg = async (dirname: string, imgSrc: string) => {
-  if (isHttpUriName(imgSrc)) {
-    return await loadHttpImg(imgSrc)
+  if (isHttpUriName(removeUrlQuotes(imgSrc))) {
+    return await loadHttpImg(removeUrlQuotes(imgSrc))
   }
   //
-  const imgPath = path.isAbsolute(imgSrc)
-    ? imgSrc
-    : path.resolve(dirname, imgSrc)
-
+  if (path.isAbsolute(imgSrc)) return await loadFileImg(imgSrc)
+  const imgPath = path.resolve(dirname, removeUrlQuotes(imgSrc))
   return await loadFileImg(imgPath)
 }
 
@@ -39,15 +44,18 @@ export const replaceImg = async (
   data: string,
   decorate = ''
 ) => {
-  if (isBinImgName(imgSrc)) {
-    const b64Literal = decorate + BASE64_PREFIX_STR + data + decorate
+  const imgPathWithoutQuotes = removeUrlQuotes(imgSrc)
+  const extName = path.extname(imgPathWithoutQuotes).slice(1)
+  if (isBinImgName(imgPathWithoutQuotes)) {
+    const b64Literal = decorate + base64Prefix(extName) + data + decorate
+
     return str.replace(imgSrc, b64Literal)
   }
   //
-  if (isSvgImgName(imgSrc)) {
+  if (isSvgImgName(imgPathWithoutQuotes)) {
     const svgLiteral = `${decorate}${SVG_PREFIX_STR}${encodeURI(data)}${decorate}`
     return str.replace(imgSrc, svgLiteral)
   }
   //
-  throw new Error('Invalid image type')
+  throw new Error(`unsuported ${imgSrc} must be svg or png or jpg or jpeg`)
 }

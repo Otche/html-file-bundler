@@ -50,7 +50,7 @@ export const HTML_MOCK = {
             <link rel="stylesheet" href="http://www.css.com/style.css" />
             <style>
                 body {
-                    background: url("data:image/png;base64,==AAAAAABB==");
+                    background: url("data:image/jpg;base64,==AAAAAABB==");
                 }
                 h1 {
                     background: url("data:image/svg+xml;utf8,%3Csvg%3E%3C/svg%3E");
@@ -71,7 +71,7 @@ export const HTML_MOCK = {
             <link rel="stylesheet" href="http://www.css.com/style.css" />
             <style>
                 body {
-                    background: url("data:image/png;base64,==AAAAAABB==");
+                    background: url("data:image/jpg;base64,==AAAAAABB==");
                 }
                 h1 {
                     background: url("data:image/svg+xml;utf8,%3Csvg%3E%3C/svg%3E");
@@ -100,7 +100,7 @@ export const HTML_MOCK = {
                 body{background: url("data:image/png;base64,==AAABB=="); }
             </style>
             <style>
-                body{ background: url("data:image/png;base64,==AAAAAABB=="); }
+                body{ background: url("data:image/jpg;base64,==AAAAAABB=="); }
                 h1 { background:url("data:image/svg+xml;utf8,%3Csvg%3E%3C/svg%3E");}
             </style>
         </head>
