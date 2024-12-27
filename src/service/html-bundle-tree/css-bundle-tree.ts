@@ -33,8 +33,7 @@ export class CSSBundleTree extends BundleTree {
     this.styleOutputStr = await CSSBundleTree.resolveImg(
       this.styleOutputStr,
       this.dirname,
-      this.styleImgsUrl,
-      '"'
+      this.styleImgsUrl
     )
   }
 

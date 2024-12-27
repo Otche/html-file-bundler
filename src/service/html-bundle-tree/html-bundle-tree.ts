@@ -74,8 +74,7 @@ export class HtmlBundleTree extends BundleTree {
     this.htmlOutputStr = await HtmlBundleTree.resolveImg(
       this.htmlOutputStr,
       this.dirname,
-      this.htmlStyleImgsUrl,
-      '"'
+      this.htmlStyleImgsUrl
     )
   }
 

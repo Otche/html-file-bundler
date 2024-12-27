@@ -10,7 +10,7 @@ export const STYLE_REGEXP = /<style[^>]*>([^<]+)<\/style>/g
 //
 export const IMG_REGEXP = /<img[^>]+src="([^"]+)"[^>]*>/g
 //
-export const STYLE_URL_REGEXP = /url[^)]*\(([^)]*)\)/gm
+export const STYLE_URL_REGEXP = /url[^)]*\("?([^)|^"]*)"?\)/gm
 
 export const base64Prefix = (fileType: string) =>
   `data:image/${fileType};base64,`

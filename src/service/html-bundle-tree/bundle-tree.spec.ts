@@ -53,8 +53,7 @@ describe('BundleTree', () => {
     const htmlOutput = await BundleTree.resolveImg(
       HTML_MOCK.input,
       '/dirname',
-      resolve_style_url_img_mock,
-      '"'
+      resolve_style_url_img_mock
     )
     expect(htmlOutput.replace(/\s/g, '')).toBe(
       HTML_MOCK.resolve_styles_url_images_snapshot.replace(/\s/g, '')

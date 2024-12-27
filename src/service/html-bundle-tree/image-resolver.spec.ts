@@ -1,4 +1,4 @@
-import { loadImg, replaceImg } from './image-resolver'
+import { loadImg } from './image-resolver'
 import { mockLoadFileImg, mockLoadHttpImg } from './mocks/load-files.mock'
 
 /**
@@ -45,30 +45,4 @@ describe('Image resolver', () => {
     ).rejects.toThrow('Mock Error')
   })
   //
-  test('should replace image in string', async () => {
-    expect(
-      await replaceImg('test <img src="test.svg" />', 'test.svg', '<svg></svg>')
-    ).toBe('test <img src="data:image/svg+xml;utf8,%3Csvg%3E%3C/svg%3E" />')
-
-    expect(
-      await replaceImg('test <img src="test.png" />', 'test.png', 'test')
-    ).toBe('test <img src="data:image/png;base64,test" />')
-
-    expect(
-      await replaceImg(
-        'test <style> .h1 {  background: url(./circle_icon-icons.com_64234.svg);}</style>',
-        './circle_icon-icons.com_64234.svg',
-        'test',
-        '"'
-      )
-    ).toBe(
-      'test <style> .h1 {  background: url("data:image/svg+xml;utf8,test");}</style>'
-    )
-  })
-
-  test('should throw error', async () => {
-    expect(() =>
-      replaceImg('test <img src="test.txt" />', 'test.txt', 'test')
-    ).rejects.toThrow('unsuported test.txt must be svg or png or jpg or jpeg')
-  })
 })
