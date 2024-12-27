@@ -6,7 +6,7 @@ import eslintConfigPrettier from 'eslint-config-prettier'
 import eslintJs from '@eslint/js'
 import importPlugin from 'eslint-plugin-import'
 
-const tsFiles = ['src/**/*.ts']
+const tsFiles = ['src/**/*.ts', 'sample/**/*.ts']
 
 const languageOptions = {
   globals: {
@@ -44,7 +44,6 @@ const customTypescriptConfig = {
     'no-duplicate-imports': 'error',
     'no-unneeded-ternary': 'error',
     'prefer-object-spread': 'error',
-
     '@typescript-eslint/no-unused-vars': [
       'error',
       {

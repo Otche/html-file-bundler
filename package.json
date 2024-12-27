@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "description": "build single file from html file wiht bundling all dependencies asset (images and css)",
   "main": "dist/index.js",
+  "module": "dist/index.d.ts",
+  "files": ["dist"],
   "scripts": {
     "test": "jest",
     "test:dev": "jest --watch",
