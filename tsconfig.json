@@ -10,7 +10,7 @@
     "emitDecoratorMetadata": true,
     "noLib": false,
     "module": "commonjs",
-    "rootDirs": ["./src", "./sample"],
+    "rootDirs": ["./src", "./sample"], 
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "allowJs": false,
@@ -28,6 +28,5 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*", "sample/index.ts"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist", "coverage"]
 }

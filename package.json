@@ -8,7 +8,7 @@
     "test:dev": "jest --watch",
     "test:coverage": "jest --coverage",
     "start:sample": "nodemon sample/index.ts",
-    "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json"
+    "build": "tsc --project src/tsconfig.json && tsc-alias -p tsconfig.json"
   },
   "keywords": [],
   "author": "",
