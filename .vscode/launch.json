@@ -4,11 +4,11 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Start:Dev",
+      "name": "start:sample",
       "skipFiles": ["<node_internals>/**"],
-      "args": ["${workspaceFolder}/src/index.ts"],
+      // "args": ["${workspaceFolder}/src/index.ts"],
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run-script", "start:dev"],
+      "runtimeArgs": ["run-script", "start:sample"],
       "restart": true,
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen"
@@ -16,7 +16,7 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Jest:Test",
+      "name": "jest:test",
       "skipFiles": ["<node_internals>/**"],
       "runtimeExecutable": "npm",
 
