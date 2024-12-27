@@ -1,8 +1,8 @@
 {
   "name": "html-file-bundler",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "description": "build single file from html file wiht bundling all dependencies asset (images and css)",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest",
     "test:dev": "jest --watch",
