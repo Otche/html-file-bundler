@@ -1,5 +1,5 @@
 import { HtmlBundleTree } from './html-bundle-tree'
-import { HTML_MOCK } from './mocks/html-mock'
+import { HTML_MOCK } from './mocks/html.mock'
 import { mockLoadFileImg, mockLoadHttpImg } from './mocks/load-files.mock'
 
 jest.mock('axios', () => {

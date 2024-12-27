@@ -1,5 +1,5 @@
 import { BundleTree } from './bundle-tree'
-import { HTML_MOCK } from './mocks/html-mock'
+import { HTML_MOCK } from './mocks/html.mock'
 import { mockLoadFileImg, mockLoadHttpImg } from './mocks/load-files.mock'
 import { BundleTreeResolver } from './type'
 
