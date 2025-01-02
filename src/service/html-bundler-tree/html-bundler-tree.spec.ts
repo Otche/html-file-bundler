@@ -1,4 +1,4 @@
-import { HtmlBundleTree } from './html-bundle-tree'
+import { HtmlBundlerTree } from './html-bundler-tree'
 import { HTML_MOCK } from './mocks/html.mock'
 import { mockLoadFileImg, mockLoadHttpImg } from './mocks/load-files.mock'
 
@@ -35,37 +35,37 @@ jest.mock('../image-loader', () => ({
 }))
 
 describe('HtmlBundleTree steps', () => {
-  let htmlBundleTree: HtmlBundleTree
+  let htmlBundlerTree: HtmlBundlerTree
   beforeAll(() => {
-    htmlBundleTree = new HtmlBundleTree(HTML_MOCK.input, 'dirname')
+    htmlBundlerTree = new HtmlBundlerTree(HTML_MOCK.input, 'dirname')
   })
   test('should get input data as first bundled html string ', () => {
-    expect(htmlBundleTree.getBundledHtmlStr()).toBe(HTML_MOCK.input)
+    expect(htmlBundlerTree.getBundledHtmlStr()).toBe(HTML_MOCK.input)
   })
 
   test('should replace src image with base64 data ', async () => {
-    await htmlBundleTree.resolveImgsSrc()
-    expect(htmlBundleTree.getBundledHtmlStr().replace(/\s/g, '')).toBe(
+    await htmlBundlerTree.resolveImgsSrc()
+    expect(htmlBundlerTree.getBundledHtmlStr().replace(/\s/g, '')).toBe(
       HTML_MOCK.resolve_src_images_snapshot.replace(/\s/g, '')
     )
   })
 
   test('should replace style url images with base64 data ', async () => {
-    await htmlBundleTree.resolveStyleImgsUrl()
-    expect(htmlBundleTree.getBundledHtmlStr().replace(/\s/g, '')).toBe(
+    await htmlBundlerTree.resolveStyleImgsUrl()
+    expect(htmlBundlerTree.getBundledHtmlStr().replace(/\s/g, '')).toBe(
       HTML_MOCK.resolve_all_imgs_snapshot.replace(/\s/g, '')
     )
   })
 
   test('should styles and here url images with base64', async () => {
-    await htmlBundleTree.resolveStylesheetLinks()
-    expect(htmlBundleTree.getBundledHtmlStr().replace(/\s/g, '')).toBe(
+    await htmlBundlerTree.resolveStylesheetLinks()
+    expect(htmlBundlerTree.getBundledHtmlStr().replace(/\s/g, '')).toBe(
       HTML_MOCK.resolve_all_snapshot.replace(/\s/g, '')
     )
   })
 
   test('should html bundle tree return string parsed data', () => {
-    const htmlBundleData = JSON.parse(htmlBundleTree.toString())
+    const htmlBundleData = JSON.parse(htmlBundlerTree.toString())
     expect(htmlBundleData.htmlImgsSrc.length).toBe(2)
     expect(htmlBundleData.htmlStyleImgsUrl.length).toBe(2)
     expect(htmlBundleData.htmlStylesheetLink.length).toBe(3)
@@ -76,17 +76,17 @@ describe('HtmlBundleTree steps', () => {
 })
 
 describe('HtmlBundleTree resolve all', () => {
-  let htmlBundleTree: HtmlBundleTree
+  let htmlBundlerTree: HtmlBundlerTree
   beforeAll(() => {
-    htmlBundleTree = new HtmlBundleTree(HTML_MOCK.input, 'dirname')
+    htmlBundlerTree = new HtmlBundlerTree(HTML_MOCK.input, 'dirname')
   })
 
   test('should get input data as first bundled html string ', () => {
-    expect(htmlBundleTree.getBundledHtmlStr()).toBe(HTML_MOCK.input)
+    expect(htmlBundlerTree.getBundledHtmlStr()).toBe(HTML_MOCK.input)
   })
 
   test('should resolve all', async () => {
-    const htmlOutputStr = await htmlBundleTree.resolve()
+    const htmlOutputStr = await htmlBundlerTree.resolve()
     expect(htmlOutputStr.replace(/\s/g, '')).toBe(
       HTML_MOCK.resolve_all_snapshot.replace(/\s/g, '')
     )

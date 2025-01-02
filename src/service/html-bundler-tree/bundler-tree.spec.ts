@@ -1,9 +1,9 @@
-import { BundleTree } from './bundle-tree'
+import { BundlerTree } from './bundler-tree'
 import { HTML_MOCK } from './mocks/html.mock'
 import { mockLoadFileImg, mockLoadHttpImg } from './mocks/load-files.mock'
-import { BundleTreeResolver } from './type'
+import { BundlerTreeResolution } from './type'
 
-const resolve_src_mock: BundleTreeResolver[] = [
+const resolve_src_mock: BundlerTreeResolution[] = [
   {
     0: '<img src="http://example.com/img.png" />',
     1: 'http://example.com/img.png',
@@ -12,9 +12,9 @@ const resolve_src_mock: BundleTreeResolver[] = [
     0: '<img src="/test/img.svg" />',
     1: '/test/img.svg',
   },
-] as unknown as BundleTreeResolver[]
+] as unknown as BundlerTreeResolution[]
 
-const resolve_style_url_img_mock: BundleTreeResolver[] = [
+const resolve_style_url_img_mock: BundlerTreeResolution[] = [
   {
     0: 'url(http://example.com/img.jpg)',
     1: 'http://example.com/img.jpg',
@@ -23,7 +23,7 @@ const resolve_style_url_img_mock: BundleTreeResolver[] = [
     0: 'url(test/img.svg)',
     1: 'test/img.svg',
   },
-] as unknown as BundleTreeResolver[]
+] as unknown as BundlerTreeResolution[]
 
 jest.mock('../image-loader', () => ({
   __esModule: true,
@@ -39,7 +39,7 @@ jest.mock('../image-loader', () => ({
 
 describe('BundleTree', () => {
   test('should resolve src images', async () => {
-    const htmlOutput = await BundleTree.resolveImg(
+    const htmlOutput = await BundlerTree.resolveImg(
       HTML_MOCK.input,
       '/dirname',
       resolve_src_mock
@@ -50,7 +50,7 @@ describe('BundleTree', () => {
   })
 
   test('should resolve style url images', async () => {
-    const htmlOutput = await BundleTree.resolveImg(
+    const htmlOutput = await BundlerTree.resolveImg(
       HTML_MOCK.input,
       '/dirname',
       resolve_style_url_img_mock

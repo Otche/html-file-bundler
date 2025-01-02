@@ -1,1 +1,1 @@
-export { HtmlBundleTree, CSSBundleTree } from './service/html-bundle-tree'
+export { CSSBundlerTree, HtmlBundlerTree } from './service/html-bundler-tree'

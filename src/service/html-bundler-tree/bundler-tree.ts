@@ -1,14 +1,14 @@
 import path from 'path'
 import { loadImg } from './image-resolver'
-import { BundleTreeResolver } from './type'
 import { base64Prefix, SVG_PREFIX_STR } from '@/utils/constant'
 import { isBinImgName } from '@/utils/ressource-path'
+import { BundlerTreeResolution } from './type'
 
-export abstract class BundleTree {
+export abstract class BundlerTree {
   static async resolveImg(
     outputStr: string,
     dirname: string,
-    imgs: BundleTreeResolver[]
+    imgs: BundlerTreeResolution[]
   ) {
     for (const img of imgs) {
       const regExpMatch = img[0]

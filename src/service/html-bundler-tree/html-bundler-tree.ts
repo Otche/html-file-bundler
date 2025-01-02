@@ -9,23 +9,23 @@ import { isHttpUriName } from '@/utils/ressource-path'
 import path from 'path'
 import axios from 'axios'
 import fs from 'fs/promises'
-import { CSSBundleTree } from './css-bundle-tree'
-import { BundleTreeResolver } from './type'
-import { BundleTree } from './bundle-tree'
+import { CSSBundlerTree } from './css-bundler-tree'
+import { BundlerTreeResolution } from './type'
+import { BundlerTree } from './bundler-tree'
 
-export class HtmlBundleTree extends BundleTree {
+export class HtmlBundlerTree extends BundlerTree {
   /**
    *
    */
-  private readonly htmlImgsSrc: BundleTreeResolver[]
+  private readonly htmlImgsSrc: BundlerTreeResolution[]
   /**
    *
    */
-  private readonly htmlStyleImgsUrl: BundleTreeResolver[]
+  private readonly htmlStyleImgsUrl: BundlerTreeResolution[]
   /**
    *
    */
-  private readonly htmlStylesheetLink: BundleTreeResolver[]
+  private readonly htmlStylesheetLink: BundlerTreeResolution[]
 
   /**
    *
@@ -59,7 +59,7 @@ export class HtmlBundleTree extends BundleTree {
    *
    */
   async resolveImgsSrc() {
-    this.htmlOutputStr = await HtmlBundleTree.resolveImg(
+    this.htmlOutputStr = await HtmlBundlerTree.resolveImg(
       this.htmlOutputStr,
       this.dirname,
       this.htmlImgsSrc
@@ -71,7 +71,7 @@ export class HtmlBundleTree extends BundleTree {
    *
    */
   async resolveStyleImgsUrl() {
-    this.htmlOutputStr = await HtmlBundleTree.resolveImg(
+    this.htmlOutputStr = await HtmlBundlerTree.resolveImg(
       this.htmlOutputStr,
       this.dirname,
       this.htmlStyleImgsUrl
@@ -84,18 +84,21 @@ export class HtmlBundleTree extends BundleTree {
   async resolveStylesheetLinks() {
     for (const link of this.htmlStylesheetLink) {
       const linkSrc = link[1]
-      let cssBundler: CSSBundleTree
+      let cssBundler: CSSBundlerTree
 
       if (isHttpUriName(linkSrc)) {
         link.data = (await axios.get(linkSrc)).data
-        cssBundler = new CSSBundleTree(link.data!, this.dirname)
+        cssBundler = new CSSBundlerTree(link.data!, this.dirname)
       } else {
         const stylesheetPath = path.isAbsolute(linkSrc)
           ? linkSrc
           : path.resolve(this.dirname, linkSrc)
 
         link.data = (await fs.readFile(stylesheetPath, UTF8)).toString()
-        cssBundler = new CSSBundleTree(link.data!, path.dirname(stylesheetPath))
+        cssBundler = new CSSBundlerTree(
+          link.data!,
+          path.dirname(stylesheetPath)
+        )
       }
 
       await cssBundler.resolveStyleImgUrl()

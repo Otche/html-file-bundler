@@ -1,13 +1,13 @@
 import { STYLE_URL_REGEXP } from '@/utils/constant'
 import { regExpExecArray } from '@/utils/string'
-import { BundleTreeResolver } from './type'
-import { BundleTree } from './bundle-tree'
+import { BundlerTreeResolution } from './type'
+import { BundlerTree } from './bundler-tree'
 
 /**
  *
  */
-export class CSSBundleTree extends BundleTree {
-  private readonly styleImgsUrl: BundleTreeResolver[]
+export class CSSBundlerTree extends BundlerTree {
+  private readonly styleImgsUrl: BundlerTreeResolution[]
   private styleOutputStr: string
 
   /**
@@ -30,7 +30,7 @@ export class CSSBundleTree extends BundleTree {
    *
    */
   async resolveStyleImgUrl() {
-    this.styleOutputStr = await CSSBundleTree.resolveImg(
+    this.styleOutputStr = await CSSBundlerTree.resolveImg(
       this.styleOutputStr,
       this.dirname,
       this.styleImgsUrl
