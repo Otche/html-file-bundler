@@ -12,7 +12,7 @@ export const IMG_REGEXP = /<img[^>]+src="([^"]+)"[^>]*>/g
 //
 export const STYLE_URL_REGEXP = /url[^)]*\("?([^)|^"]*)"?\)/gm
 
-export const base64Prefix = (fileType: string) =>
+export const base64BinImagePrefix = (fileType: string) =>
   `data:image/${fileType};base64,`
 //
 export const SVG_PREFIX_STR = 'data:image/svg+xml;utf8,'

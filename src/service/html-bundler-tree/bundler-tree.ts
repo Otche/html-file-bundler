@@ -1,8 +1,9 @@
 import path from 'path'
 import { loadImg } from './image-resolver'
-import { base64Prefix, SVG_PREFIX_STR } from '@/utils/constant'
+import { base64BinImagePrefix } from '@/utils/constant'
 import { isBinImgName } from '@/utils/ressource-path'
 import { BundlerTreeResolution } from './type'
+import { svg64 } from 'svg64'
 
 export abstract class BundlerTree {
   static async resolveImg(
@@ -18,8 +19,8 @@ export abstract class BundlerTree {
 
       const extName = path.extname(imgSrc).slice(1)
       const bundledImgLitteral = isBinImgName(imgSrc)
-        ? base64Prefix(extName) + img.data
-        : SVG_PREFIX_STR + encodeURI(img.data)
+        ? base64BinImagePrefix(extName) + img.data
+        : svg64(img.data)
 
       if (regExpMatch.startsWith('url(')) {
         outputStr = outputStr.replace(
